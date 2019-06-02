@@ -1,2 +1,2 @@
-# minging
+# mining site
 MCDS Capstone Project
