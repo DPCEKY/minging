@@ -6,6 +6,7 @@ RetinaNet, developed by Facebook AI Research (FAIR), is a one-stage detector sol
 
 In order to get started with RetinaNet clone the following github repository: 
 * [RetinaNet](https://github.com/fizyr/keras-retinanet.git) - RetinaNet Keras
+
 Check the requirements and follow along the installation steps.
 
 ## Custom Modifications
