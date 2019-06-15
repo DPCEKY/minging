@@ -1,10 +1,12 @@
-# Project Title
+# YOLOv3
 
-One Paragraph of project description goes here
+YOLO (You Only Look Once) is a network architecture based on a single CNN predicting bounding boxesand class probabilities within one evaluation step.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+In order to get started with YOLOv3 clone the following github repository: 
+* [YOLOv3](https://github.com/AlexeyAB/darknet) - Yolov3 & Yolov2 for Linux and Windows
+Check the requirements and follow along the installation steps.
 
 ### Prerequisites
 
