@@ -10,14 +10,16 @@ Check the requirements and follow along the installation steps.
 
 ## Custom Modifications
 
-### fff
-   .
-   ├── ...
-   ├── test                    # Test files (alternatively `spec` or `tests`)
-   │   ├── benchmarks          # Load and stress tests
-   │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
-   │   └── unit                # Unit tests
-   └── ...
+### A typical top-level directory layout
+
+    .
+    ├── build                   # Compiled files (alternatively `dist`)
+    ├── docs                    # Documentation files (alternatively `doc`)
+    ├── src                     # Source files (alternatively `lib` or `app`)
+    ├── test                    # Automated tests (alternatively `spec` or `tests`)
+    ├── tools                   # Tools and utilities
+    ├── LICENSE
+    └── README.md
 
 ## Run Code
 
