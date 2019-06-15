@@ -4,8 +4,8 @@ RetinaNet, developed by Facebook AI Research (FAIR), is a one-stage detector sol
 
 ## Getting Started
 
-In order to get started with YOLOv3 clone the following github repository: 
-* [YOLOv3](https://github.com/AlexeyAB/darknet) - Yolov3 & Yolov2 for Linux and Windows
+In order to get started with RetinaNet clone the following github repository: 
+* [RetinaNet](https://github.com/fizyr/keras-retinanet.git) - RetinaNet Keras
 Check the requirements and follow along the installation steps.
 
 ## Custom Modifications
