@@ -188,7 +188,7 @@ class mining(imdb):
 
         box_list = []
         for i in xrange(raw_data.shape[0]):
-            boxes = raw_data[i][:, (1, 0, 3, 2)] 
+            boxes = raw_data[i][:, (1, 0, 3, 2)]
             keep = ds_utils.unique_boxes(boxes)
             boxes = boxes[keep, :]
             keep = ds_utils.filter_small_boxes(boxes, self.config['min_size'])
@@ -228,8 +228,8 @@ class mining(imdb):
 
             # Make pixel indexes 0-based
             # size=obj.find('size')
-	    x1 = float(bbox.find('xmin').text) 
-	    y1 = float(bbox.find('ymin').text)
+            x1 = float(bbox.find('xmin').text)
+            y1 = float(bbox.find('ymin').text)
             x2 = float(bbox.find('xmax').text)
             y2 = float(bbox.find('ymax').text)
 
