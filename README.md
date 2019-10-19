@@ -15,7 +15,5 @@ Mining activities for minerals and metals in resource-rich countries have grown 
    - Wenping Wang
 
 ## Data prep
-  run 
-  `python dedup.py`
-  `python xml_generator.py`
+  - run `python dedup.py` and `python xml_generator.py`
   
