@@ -47,7 +47,7 @@ with open('test_info.csv') as fp:
     for line in fp:
       filename,label,loc_x_min,loc_x_max,loc_y_min,loc_y_max = line.strip().split(',')
       if (not filename in train_imgs) and (not filename in test_imgs):
-        fpf.write(filename + ',' + str(int(label) % 2) + ',' + loc_x_min + ',' + loc_x_max + ',' + loc_y_min + ',' + loc_y_max + '\n')
+        fpf.write(filename + ',' + label + ',' + loc_x_min + ',' + loc_x_max + ',' + loc_y_min + ',' + loc_y_max + '\n')
       test_imgs.add(filename)
 
 train_imgs = set()
@@ -58,7 +58,7 @@ with open('train_info.csv') as fp:
     for line in fp:
       filename,label,loc_x_min,loc_x_max,loc_y_min,loc_y_max = line.strip().split(',')
       if not filename in train_imgs:
-        fpf.write(filename + ',' + str(int(label) % 2) + ',' + loc_x_min + ',' + loc_x_max + ',' + loc_y_min + ',' + loc_y_max + '\n')
+        fpf.write(filename + ',' + label + ',' + loc_x_min + ',' + loc_x_max + ',' + loc_y_min + ',' + loc_y_max + '\n')
       train_imgs.add(filename)
 
 

@@ -45,7 +45,8 @@ class mining(imdb):
             else devkit_path
         self._data_path = os.path.join(self._devkit_path, 'MINING')
         self._classes = ('__background__',  # always index 0
-                         'mine')
+                         'mine',
+                         'nonmine')
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
         self._image_ext = '.jpg'
         self._image_index = self._load_image_set_index()
@@ -204,7 +205,7 @@ class mining(imdb):
         """
         filename = os.path.join(self._data_path, 'Annotations', index + '.xml')
         tree = ET.parse(filename)
-        objs = tree.findall('object')
+        objs = tree.findall('object')[0]
         # if not self.config['use_diff']:
         #     # Exclude the samples labeled as difficult
         #     non_diff_objs = [
@@ -297,6 +298,8 @@ class mining(imdb):
             'Main',
             self._image_set + '.txt')
         cachedir = os.path.join(self._devkit_path, 'annotations_cache')
+        recs = []
+        precs = []
         aps = []
         if not os.path.isdir(output_dir):
             os.mkdir(output_dir)
@@ -307,10 +310,16 @@ class mining(imdb):
             rec, prec, ap = voc_eval(
                 filename, annopath, imagesetfile, cls, cachedir, ovthresh=0.5,
                 use_07_metric=False)
+            recs += [rec[-1]]
+            precs += [prec[-1]]
             aps += [ap]
+            print('recall for {} = {:.4f}'.format(cls, rec[-1]))
+            print('precision for {} = {:.4f}'.format(cls, prec[-1]))
             print('AP for {} = {:.4f}'.format(cls, ap))
             with open(os.path.join(output_dir, cls + '_pr.pkl'), 'wb') as f:
                 pickle.dump({'rec': rec, 'prec': prec, 'ap': ap}, f)
+        print('Mean recs = {:.4f}'.format(np.mean(recs)))
+        print('Mean precs = {:.4f}'.format(np.mean(precs)))
         print('Mean AP = {:.4f}'.format(np.mean(aps)))
         print('~~~~~~~~')
         print('Results:')

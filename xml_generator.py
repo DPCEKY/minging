@@ -58,9 +58,10 @@ def load_pascal_annotation(filename):
 
     boxes = np.zeros((num_objs, 4), dtype=np.uint16)
     gt_classes = np.zeros((num_objs), dtype=np.int32)
-    num_classes = 2
+    num_classes = 3
     classes = ('__background__',  # always index 0
-                         'mine')
+                         'mine',
+                         'nonmine')
     class_to_ind = dict(zip(classes, range(num_classes)))
 
     overlaps = np.zeros((num_objs, num_classes), dtype=np.float32)
@@ -157,7 +158,7 @@ with open('train_info_final.csv') as fp:
       for i in range(mine_box_num):
         obj_dict = {}
 
-        obj_dict["name"] = "mine" if int(label) else '__background__'
+        obj_dict["name"] = "mine" if int(label) == 1 else 'nonmine'
 
         obj_dict["bndbox"] = {}
         obj_dict["bndbox"]["xmin"] = str(int(float(loc_x_mins[i]) * w))
@@ -181,9 +182,35 @@ with open('train_info_final.csv') as fp:
       # print(parsed['boxes'])
       # print(parsed['gt_classes'])
       # print(parsed['gt_ishard'])
-      # print(parsed['gt_overlaps'])
+      print(parsed['gt_overlaps'].toarray())
+      
+      gt_overlaps = parsed['gt_overlaps'].toarray()
+      # max overlap with gt over classes (columns)
+      max_overlaps = gt_overlaps.max(axis=1)
+      # gt class that had the max overlap
+      max_classes = gt_overlaps.argmax(axis=1)
+
+      print(max_overlaps)
+      print(max_classes)
+      print('-' * 10)
+
+      # sanity checks
+      # max overlap of 0 => class should be zero (background)
+      zero_inds = np.where(max_overlaps == 0)[0]
+      print(zero_inds)
+      print(max_classes[zero_inds])
+
+      assert all(max_classes[zero_inds] == 0)
+      # max overlap > 0 => class should not be zero (must be a fg class)
+      nonzero_inds = np.where(max_overlaps > 0)[0]
+      print(nonzero_inds)
+      print(max_classes[nonzero_inds])
+
+      assert all(max_classes[nonzero_inds] != 0)
       # print(parsed['seg_areas'])
       cnt += 1
+
+      print('*' * 10)
 
       # exit()
       test_txt.write(filename.split('.jpg')[0] + '\n')
